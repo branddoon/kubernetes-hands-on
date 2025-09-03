@@ -1,0 +1,33 @@
+#Generar key 
+openssl genrsa -out ricardo.key 2048
+
+#Generar certified signing request
+openssl req -new -key ricardo.key -out ricardo.csr -subj "/CN=ricardo/O=dev"
+
+#Firmar certified signing request através de un Certified Authority
+openssl x509 -req -CA /home/brandon/.minikube/ca.crt -CAkey /home/brandon/.minikube/ca.key -in ricardo.csr -CAcreateserial -out ricardo.crt -days 500
+
+#Validar certificado
+openssl x509 -in ricardo.crt -noout -text
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+#Abrir nuevo contenedor 
+
+docker run --rm -ti -v $PWD:/test -w /test -v /home/brandon/.minikube/ca.crt:/ca.crt -v /usr/local/bin/kubectl:/usr/bin/kubectl alpine sh
+
+#Setear el cluster
+
+kubectl config set-cluster minikube --server=https://127.0.0.1:32771 --certificate-authority=/ca.crt
+
+#Setear user 
+
+kubectl config set-credentials ricardo --client-certificate=ricardo.crt --client-key=ricardo.key
+
+#Setear contexto 
+
+kubectl config set-context ricardo --cluster=minikube --user=ricardo
+
+#Usar contexto 
+
+kubectl config use-context ricardo

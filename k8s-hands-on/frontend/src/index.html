@@ -1,0 +1,22 @@
+<div id="id01"></div>
+<div id="id02"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://127.0.0.1:42557";
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText)
+        var myArr = JSON.parse(this.responseText);
+        myFunction(myArr);
+    }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+    document.getElementById("id01").innerHTML = "<h2>La hora es: " + arr.time + "</h2>";
+    document.getElementById("id02").innerHTML = "<h2>El hostname es: " + arr.hostname + "</h2>";
+}
+</script>
