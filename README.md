@@ -7,6 +7,21 @@ Requirements are the following:
  - Kubernetes 
  - Minukube (Cluster)
 
+Each folder contains different cases, commands that are used during that execution are attached:
+
+By filename 
+
+- kubectl apply -f [filename]
+
+Operations with PODS/DEPLOYMENT/RS
+
+- kubectl get 
+- kubectl describe 
+- kubectl delete
+- kubectl create
+- kubectl edit 
+- kubectl logs
+
 ## Credits
 
 Code was obtained during the course "Kubernetes de principciante a experto" imparted by Ricardo Andre Gonzales Gomez. 
