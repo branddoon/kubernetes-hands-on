@@ -21,7 +21,3 @@ Operations with PODS/DEPLOYMENT/RS
 - kubectl create
 - kubectl edit 
 - kubectl logs
-
-## Credits
-
-Code was obtained during the course "Kubernetes de principciante a experto" imparted by Ricardo Andre Gonzales Gomez. 
